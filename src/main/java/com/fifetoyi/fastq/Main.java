@@ -11,7 +11,9 @@ public class Main {
         // Return and merge results
 
 //        String path = "src/main/resources/sample.fastq";
-        String path = "src/main/resources/sample.fastq.gz";
+//        String path = "src/main/resources/sample.fastq.gz";
+        String path = "src/main/resources/" + args[0];
+
         BufferedReader reader;
 
         if (path.endsWith(".gz")) {
