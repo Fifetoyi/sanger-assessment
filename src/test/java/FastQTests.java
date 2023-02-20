@@ -18,7 +18,22 @@ public class FastQTests {
         FastQSequence sequence = new FastQSequence(line1, line2, line3, line4);
         AnalysisResult result = AnalyticsGenerator.analyse(sequence);
 
+        //Then
         assertEquals(1, result.getTotalSequences());
         assertEquals(192, result.getTotalNucleotides());
+    }
+
+    @Test
+    void givenTwoValidSequences_merge_returnsMergedResults() {
+        // Given
+        AnalysisResult result1 = new AnalysisResult(1, 250);
+        AnalysisResult result2 = new AnalysisResult(1, 240);
+
+        // When
+        AnalysisResult result = AnalyticsGenerator.merge(result1, result2);
+
+        //Then
+        assertEquals(2, result.getTotalSequences());
+        assertEquals(490, result.getTotalNucleotides());
     }
 }
