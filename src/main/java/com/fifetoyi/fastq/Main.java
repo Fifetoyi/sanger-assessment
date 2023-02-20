@@ -14,6 +14,9 @@ public class Main {
         String path = "src/main/resources/sample.fastq";
         BufferedReader reader = new BufferedReader(new FileReader(path));
 
+        // Base case
+        AnalysisResult currentResult = new AnalysisResult(0, 0);
+
         while(reader.ready()) {
             String line1 = reader.readLine();
             String line2 = reader.readLine();
@@ -21,8 +24,10 @@ public class Main {
             String line4 = reader.readLine();
 
             FastQSequence sequence = new FastQSequence(line1, line2, line3, line4);
-            AnalyticsGenerator.analyse(sequence);
-//            System.out.println(sequence);
+            currentResult = AnalyticsGenerator.analyseAndMerge(sequence, currentResult);
         }
+
+        System.out.printf("Total sequences: %d\nTotal Nucleotides: %d\n", currentResult.getTotalSequences(), currentResult.getTotalNucleotides());
+        reader.close();
     }
 }
