@@ -11,4 +11,9 @@ public class AnalyticsGenerator {
 
         return new AnalysisResult(totalSequences, totalNucleotides);
     }
+
+    public static AnalysisResult analyseAndMerge(FastQSequence sequence, AnalysisResult currentResult) {
+        AnalysisResult result = analyse(sequence);
+        return merge(result, currentResult);
+    }
 }
