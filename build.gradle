@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.fifetoyi.fastq'
+group 'com.fifetoyi.fastq'
 version '1.0-SNAPSHOT'
 
 repositories {
