@@ -1,8 +1,7 @@
 package com.fifetoyi.fastq;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.zip.GZIPInputStream;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -11,8 +10,15 @@ public class Main {
         // Run analytics on sequence
         // Return and merge results
 
-        String path = "src/main/resources/sample.fastq";
-        BufferedReader reader = new BufferedReader(new FileReader(path));
+//        String path = "src/main/resources/sample.fastq";
+        String path = "src/main/resources/sample.fastq.gz";
+        BufferedReader reader;
+
+        if (path.endsWith(".gz")) {
+            reader = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(path))));
+        } else {
+            reader = new BufferedReader(new FileReader(path));
+        }
 
         // Base case
         AnalysisResult currentResult = new AnalysisResult(0, 0);
@@ -28,6 +34,7 @@ public class Main {
         }
 
         System.out.printf("Total sequences: %d\nTotal Nucleotides: %d\n", currentResult.getTotalSequences(), currentResult.getTotalNucleotides());
+
         reader.close();
     }
 }
